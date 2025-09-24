@@ -1,0 +1,15 @@
+<header class="site-header">
+  <h1><a href="{% if lang == 'hr' %}/hr/{% else %}/{% endif %}">{{ site.t[lang].siteTitle }}</a></h1>
+  {# <nav>
+    <ul class="nav">
+      <li><a href="{% if lang == 'hr' %}/hr/{% else %}/{% endif %}">{{ site.t[lang].home }}</a></li>
+    </ul>
+  </nav> #}
+  <div class="lang-switch">
+    {% if lang == 'en' %}
+      <span>EN</span> | <a href="/hr/">HR</a>
+    {% else %}
+      <a href="/">EN</a> | <span>HR</span>
+    {% endif %}
+  </div>
+</header>

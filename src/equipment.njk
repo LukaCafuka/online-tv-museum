@@ -1,0 +1,52 @@
+---
+layout: base.njk
+pagination:
+  data: collections.equipment
+  size: 1
+  alias: item
+permalink: "equipment/{{ item.data.slug }}/index.html"
+lang: en
+eleventyComputed:
+  title: "{{ item.data.brand }} {{ item.data.model }}"
+---
+
+<article class="gear-detail ui-widget ui-widget-content ui-corner-all">
+  <p><a href="/">← {{ site.t[lang].equipment }}</a></p>
+  <h2>{{ item.data.brand }} {{ item.data.model }} ({{ item.data.year }})</h2>
+  {% set gallery = galleries[item.data.slug] %}
+  {% if gallery and gallery.length %}
+    <img class="detail-image ui-widget-content ui-corner-all" src="{{ gallery[0] }}" alt="{{ item.data.brand }} {{ item.data.model }}" />
+  {% else %}
+    <img class="detail-image ui-widget-content ui-corner-all" src="{{ item.data.image }}" alt="{{ item.data.brand }} {{ item.data.model }}" />
+  {% endif %}
+  <div id="equipment-tabs" class="ui-tabs" style="margin-top:1rem;">
+    <ul>
+      <li><a href="#tab-desc">{{ site.t[lang].description }}</a></li>
+      <li><a href="#tab-specs">{{ site.t[lang].specifications }}</a></li>
+      {% if gallery and gallery.length > 1 %}<li><a href="#tab-gallery">Gallery ({{ gallery.length }})</a></li>{% endif %}
+    </ul>
+    <div id="tab-desc">
+      <div>{{ item.templateContent | langSection(lang) | safe }}</div>
+    </div>
+    <div id="tab-specs">
+      <ul>
+        {% for s in item.data.specs[lang] %}
+          <li>{{ s }}</li>
+        {% endfor %}
+      </ul>
+  <p class="gear-meta">{{ site.t[lang].brand }}: {{ item.data.brand }} | {{ site.t[lang].model }}: {{ item.data.model }} | {{ site.t[lang].year }}: {{ item.data.year }}</p>
+    </div>
+    {% if gallery and gallery.length > 1 %}
+    <div id="tab-gallery">
+      <div class="gallery-grid">
+        {% for img in gallery %}
+          <a href="{{ img }}" target="_blank" class="gallery-thumb ui-corner-all ui-widget-content"><img src="{{ img }}" alt="{{ item.data.brand }} {{ item.data.model }} image {{ loop.index }}" loading="lazy" /></a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <p style="font-size:0.75rem;">
+  <a href="/oprema/{{ item.data.slug }}/">HR</a> | EN
+  </p>
+</article>

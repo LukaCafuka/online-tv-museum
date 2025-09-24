@@ -1,0 +1,30 @@
+{
+  "defaultLang": "en",
+  "languages": ["en", "hr"],
+  "t": {
+    "en": {
+      "siteTitle": "Luka's Television Museum",
+      "home": "Home",
+      "equipment": "Equipment",
+      "specifications": "Specifications",
+      "description": "Description",
+      "year": "Year",
+      "brand": "Brand",
+      "model": "Model",
+      "language": "Language",
+      "details": "Details"
+    },
+    "hr": {
+      "siteTitle": "Lukin televizijski muzej",
+      "home": "Početna",
+      "equipment": "Oprema",
+      "specifications": "Specifikacije",
+      "description": "Opis",
+      "year": "Godina",
+      "brand": "Proizvođač",
+      "model": "Model",
+      "language": "Jezik",
+      "details": "Detalji"
+    }
+  }
+}

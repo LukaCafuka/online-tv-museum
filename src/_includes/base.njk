@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="{{ lang or site.defaultLang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{{ title }} | {{ site.t[lang or site.defaultLang].siteTitle }}</title>
+    <link rel="stylesheet" href="/assets/vendor/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/assets/css/theme.css?v=1" />
+</head>
+<body class="site-body">
+    {% set lang = lang or site.defaultLang %}
+    <div class="page">
+        {% include "header.njk" %}
+        <main>
+            {{ content | safe }}
+        </main>
+        <footer>&copy; {{ currentYear }} - z.com.hr</footer>
+    </div>
+    <div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true" aria-label="Image preview">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content ui-widget ui-widget-content ui-corner-all">
+            <button type="button" class="lightbox-close ui-state-default ui-corner-all" aria-label="Close">×</button>
+            <div class="lightbox-nav" aria-hidden="true">
+                <button type="button" class="lb-prev" aria-label="Previous image">‹</button>
+                <button type="button" class="lb-next" aria-label="Next image">›</button>
+            </div>
+            <img id="lightbox-img" alt="Preview" />
+            <div class="lightbox-actions">
+                <a id="lightbox-open-original" href="#" target="_blank" rel="noopener" class="lightbox-original ui-state-default ui-corner-all">Full image ↗</a>
+            </div>
+            <p id="lightbox-caption"></p>
+        </div>
+    </div>
+    <script src="/assets/vendor/jquery.min.js"></script>
+    <script src="/assets/vendor/jquery-ui.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>
