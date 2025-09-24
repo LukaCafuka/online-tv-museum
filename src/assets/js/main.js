@@ -20,15 +20,19 @@ $(function() {
   function buildGalleryList() {
     galleryList = $('.gallery-thumb').map(function(){
       const a = this; const img = $(a).find('img')[0];
-      return { href: a.getAttribute('href') || img.src, alt: img.alt || '' };
+      return { 
+        href: a.getAttribute('href') || img.src, 
+        alt: img.alt || '',
+        original: a.getAttribute('data-original') || a.getAttribute('href') || img.src
+      };
     }).get();
   }
-  function openLightbox(src, alt, keep=false) {
+  function openLightbox(src, alt, original, keep=false) {
     if(!keep) buildGalleryList();
     const $lb = $('#lightbox');
     $('#lightbox-img').attr('src', src);
     $('#lightbox-caption').text(alt || '');
-    $('#lightbox-open-original').attr('href', src);
+    $('#lightbox-open-original').attr('href', original || src);
     galleryIndex = galleryList.findIndex(g => g.href === src);
     $lb.removeClass('hidden');
     $('body').addClass('lightbox-open');
@@ -39,7 +43,7 @@ $(function() {
     if(galleryIndex === -1) galleryIndex = 0;
     galleryIndex = (galleryIndex + delta + galleryList.length) % galleryList.length;
     const g = galleryList[galleryIndex];
-    openLightbox(g.href, g.alt, true);
+    openLightbox(g.href, g.alt, g.original, true);
   }
   function closeLightbox() {
     $('#lightbox').addClass('hidden');
@@ -49,10 +53,12 @@ $(function() {
   $(document).on('click', '.gallery-thumb', function(e){
     e.preventDefault();
     const img = $(this).find('img')[0];
-    openLightbox($(this).attr('href') || img.src, img.alt);
+    const original = $(this).attr('data-original') || $(this).attr('href') || img.src;
+    openLightbox($(this).attr('href') || img.src, img.alt, original);
   });
   $(document).on('click', '.detail-image', function(){
-    openLightbox(this.src, this.alt);
+    // Hero images don't have data-original, so they use the optimized version for both display and full image
+    openLightbox(this.src, this.alt, this.src);
   });
   $(document).on('click', '.lightbox-backdrop, .lightbox-close', function(){
     closeLightbox();

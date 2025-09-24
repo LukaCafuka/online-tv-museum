@@ -35,9 +35,10 @@ module.exports = () => {
       }
     }
 
-    // Build gallery with caption data
+    // Build gallery with caption data and original/optimized URLs
     galleries[slug] = files.map(fname => ({
-      src: `/assets/images/${slug}/${fname}`,
+      src: `/assets/images/${slug}/${fname}`,        // Optimized version for display
+      originalSrc: `/assets/images/${slug}/${fname}`, // Original for "Full image" button
       filename: fname,
       captions: captions[fname] || {}
     }));

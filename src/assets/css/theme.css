@@ -35,7 +35,7 @@ main { max-width: 1040px; margin: 18px auto 40px; padding:0 18px 10px; }
 .gear-item { position:relative; padding:10px 10px 12px; }
 .gear-item.ui-widget-content { background:#fafafa; background:linear-gradient(#ffffff,#f1f1f1); }
 .gear-item.ui-widget-content:hover { border-color:#6aa1d3; }
-.gear-item img { max-width:100%; border:1px solid #bbb; background:#fff; padding:2px; box-shadow:0 0 3px rgba(0,0,0,.15); display:block; margin:0 auto 6px; }
+.gear-item img, .gear-item picture img { max-width:100%; height:auto; border:1px solid #bbb; background:#fff; padding:2px; box-shadow:0 0 3px rgba(0,0,0,.15); display:block; margin:0 auto 6px; }
 .gear-item strong { display:block; margin-top:4px; font-size:14px; color:#123955; }
 .gear-item small { color:#555; }
 .gear-item .tag { position:absolute; top:6px; right:6px; background:#6f8fb1; color:#fff; padding:2px 6px; font-size:10px; letter-spacing:.5px; border-radius:3px; text-transform:uppercase; }
@@ -49,8 +49,9 @@ main { max-width: 1040px; margin: 18px auto 40px; padding:0 18px 10px; }
 .gear-detail { max-width:880px; width:100%; margin:0 auto; display:block; box-sizing:border-box; }
 .gear-detail h2 { font-size:20px; margin:0 0 10px; color:#123955; }
 .gear-detail { background:linear-gradient(#ffffff,#f5f5f5); padding:20px 24px 26px; }
-.gear-detail img { background:#fff; padding:4px; box-shadow:0 0 4px rgba(0,0,0,.18); }
-.gear-detail .detail-image { max-width:420px; width:100%; display:block; margin:0 0 16px; }
+.gear-detail img, .gear-detail picture img { background:#fff; padding:4px; box-shadow:0 0 4px rgba(0,0,0,.18); }
+.gear-detail .detail-image, .gear-detail picture { max-width:420px; width:100%; display:block; margin:0 0 16px; }
+.gear-detail picture img { width:100%; height:auto; }
 
 /* Gallery (re-added) */
 .gallery-grid { display:grid; gap:10px; grid-template-columns: repeat(auto-fill,minmax(120px,1fr)); margin-top:8px; }
@@ -70,6 +71,10 @@ footer { text-align:center; padding:30px 0 50px; font-size:11px; color:#4a5866; 
 .ui-widget { font-family:inherit; }
 .ui-widget-header { background:linear-gradient(#6f8fb1,#4e6d8a); color:#fff; border:1px solid #3f5c74; }
 .ui-widget-content { border:1px solid #b5bcc2; border-radius:6px; }
+
+/* Responsive image fixes */
+picture { display: block; }
+picture img { width: 100%; height: auto; max-width: 100%; }
 
 /* Hover / active states */
 .ui-state-hover, .ui-widget-content .ui-state-hover { background:linear-gradient(#e3f1fb,#c5e0f5); border-color:#6aa1d3; }

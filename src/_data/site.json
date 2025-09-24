@@ -1,9 +1,11 @@
 {
+  "url": "https://e.com.hr/",
   "defaultLang": "en",
   "languages": ["en", "hr"],
   "t": {
     "en": {
       "siteTitle": "Luka's Television Museum",
+      "siteDescription": "Explore an online museum of vintage television and video equipment from the golden age of broadcasting.",
       "home": "Home",
       "equipment": "Equipment",
       "specifications": "Specifications",
@@ -16,6 +18,7 @@
     },
     "hr": {
       "siteTitle": "Lukin televizijski muzej",
+      "siteDescription": "Pogledajte online muzej stare televizijske i video opreme iz zlatnog doba radiodifuzije.",
       "home": "Početna",
       "equipment": "Oprema",
       "specifications": "Specifikacije",

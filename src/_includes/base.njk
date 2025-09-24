@@ -3,7 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    
+    <!-- Title and basic meta -->
     <title>{{ title }} | {{ site.t[lang or site.defaultLang].siteTitle }}</title>
+    {% set pageDescription = description or (item.data.description[lang].short if item.data.description else '') or site.t[lang or site.defaultLang].siteDescription %}
+    <meta name="description" content="{{ pageDescription }}" />
+    {% if item.data %}
+    <meta name="keywords" content="{{ item.data.brand }}, {{ item.data.model }}, {{ item.data.category }}, {{ item.data.year }}, vintage video equipment, professional broadcasting" />
+    {% endif %}
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+    
+    <!-- Language alternates -->
+    {% if lang == 'en' and item.data %}
+    <link rel="alternate" hreflang="hr" href="{{ site.url }}/oprema/{{ item.data.slug }}/" />
+    <link rel="alternate" hreflang="en" href="{{ site.url }}/equipment/{{ item.data.slug }}/" />
+    {% elif lang == 'hr' and item.data %}
+    <link rel="alternate" hreflang="en" href="{{ site.url }}/equipment/{{ item.data.slug }}/" />
+    <link rel="alternate" hreflang="hr" href="{{ site.url }}/oprema/{{ item.data.slug }}/" />
+    {% elif lang == 'en' %}
+    <link rel="alternate" hreflang="hr" href="{{ site.url }}/hr/" />
+    {% elif lang == 'hr' %}
+    <link rel="alternate" hreflang="en" href="{{ site.url }}/" />
+    {% endif %}
+    <link rel="alternate" hreflang="x-default" href="{{ site.url }}/" />
+    
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="{{ title }} | {{ site.t[lang or site.defaultLang].siteTitle }}" />
+    <meta property="og:description" content="{{ pageDescription }}" />
+    {% set gallery = galleries[item.data.slug] if item.data %}
+    {% if gallery and gallery.length %}
+    <meta property="og:image" content="{{ site.url }}{{ gallery[0].src }}" />
+    <meta name="twitter:image" content="{{ site.url }}{{ gallery[0].src }}" />
+    {% endif %}
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ site.t[lang or site.defaultLang].siteTitle }}" />
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ title }} | {{ site.t[lang or site.defaultLang].siteTitle }}" />
+    <meta name="twitter:description" content="{{ pageDescription }}" />
+    
+    <!-- Structured Data for Equipment -->
+    {% if item.data %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "{{ item.data.brand }} {{ item.data.model }}",
+      "brand": {
+        "@type": "Brand",
+        "name": "{{ item.data.brand }}"
+      },
+      "model": "{{ item.data.model }}",
+      "releaseDate": "{{ item.data.year }}",
+      "category": "{{ item.data.category }}",
+      {% if gallery and gallery.length %}
+      "image": [
+        {% for img in gallery %}"{{ site.url }}{{ img.src }}"{{ "," if not loop.last }}{% endfor %}
+      ],
+      {% endif %}
+      "description": "{{ item.templateContent | langSection(lang) | striptags | truncate(160) }}",
+      "manufacturer": {
+        "@type": "Organization",
+        "name": "{{ item.data.brand }}"
+      }
+    }
+    </script>
+    {% endif %}
+    
+    <!-- Website structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "{{ site.t[lang or site.defaultLang].siteTitle }}",
+      "description": "{{ site.t[lang or site.defaultLang].siteDescription }}",
+      "url": "{{ site.url }}",
+      "inLanguage": ["en", "hr"],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ site.url }}/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
     <link rel="stylesheet" href="/assets/vendor/jquery-ui.min.css" />
     <link rel="stylesheet" href="/assets/css/theme.css?v=1" />
 </head>
