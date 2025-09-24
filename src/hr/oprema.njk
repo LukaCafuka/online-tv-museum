@@ -15,7 +15,8 @@ eleventyComputed:
   <h2>{{ item.data.brand }} {{ item.data.model }} ({{ item.data.year }})</h2>
   {% set gallery = galleries[item.data.slug] %}
   {% if gallery and gallery.length %}
-    <img class="detail-image ui-widget-content ui-corner-all" src="{{ gallery[0] }}" alt="{{ item.data.brand }} {{ item.data.model }}" />
+    {% set heroCaption = gallery[0].captions[lang] or gallery[0].captions['en'] or (item.data.brand + ' ' + item.data.model) %}
+    <img class="detail-image ui-widget-content ui-corner-all" src="{{ gallery[0].src }}" alt="{{ heroCaption }}" />
   {% else %}
     <img class="detail-image ui-widget-content ui-corner-all" src="{{ item.data.image }}" alt="{{ item.data.brand }} {{ item.data.model }}" />
   {% endif %}
@@ -40,7 +41,10 @@ eleventyComputed:
     <div id="tab-gallery">
       <div class="gallery-grid">
         {% for img in gallery %}
-          <a href="{{ img }}" target="_blank" class="gallery-thumb ui-corner-all ui-widget-content"><img src="{{ img }}" alt="{{ item.data.brand }} {{ item.data.model }} slika {{ loop.index }}" loading="lazy" /></a>
+          {% set caption = img.captions[lang] or img.captions['en'] %}
+          <a href="{{ img.src }}" class="gallery-thumb ui-corner-all ui-widget-content">
+            <img src="{{ img.src }}" alt="{{ caption or (item.data.brand + ' ' + item.data.model + ' slika ' + loop.index) }}" loading="lazy" />
+          </a>
         {% endfor %}
       </div>
     </div>

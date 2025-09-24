@@ -21,9 +21,26 @@ module.exports = () => {
       .filter(f => f.isFile() && exts.has(path.extname(f.name).toLowerCase()))
       .map(f => f.name)
       .sort((a,b) => a.localeCompare(b, undefined, { numeric:true }));
-    if (files.length) {
-  galleries[slug] = files.map(f => `/assets/images/${slug}/${f}`);
+    
+    if (!files.length) continue;
+
+    // Load optional captions
+    let captions = {};
+    const captionsPath = path.join(abs, 'captions.json');
+    if (fs.existsSync(captionsPath)) {
+      try {
+        captions = JSON.parse(fs.readFileSync(captionsPath, 'utf-8')) || {};
+      } catch (e) {
+        console.warn(`Invalid captions.json in ${slug}:`, e.message);
+      }
     }
+
+    // Build gallery with caption data
+    galleries[slug] = files.map(fname => ({
+      src: `/assets/images/${slug}/${fname}`,
+      filename: fname,
+      captions: captions[fname] || {}
+    }));
   }
   return galleries;
 };

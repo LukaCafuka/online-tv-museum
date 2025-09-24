@@ -7,14 +7,11 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
 
   eleventyConfig.addCollection('equipment', (collectionApi) => {
-    return collectionApi
-      .getFilteredByGlob('./src/equipment/*.md')
-      // Skip drafts and any files missing basic metadata (prevents sort crashes)
-      .filter(item => !item.data.draft && item.data && item.data.brand && item.data.model)
-      // Case-insensitive sort by brand+model; guard against non-strings
-      .sort((a, b) => {
-        const aKey = `${a.data.brand || ''} ${a.data.model || ''}`.toLowerCase();
-        const bKey = `${b.data.brand || ''} ${b.data.model || ''}`.toLowerCase();
+    return collectionApi.getFilteredByGlob('./src/equipment/*.md')
+      .filter(item => !item.data.draft && item.data && item.data.brand && item.data.model) // allow draft flag later + filter out incomplete
+      .sort((a,b) => {
+        const aKey = `${a.data.brand} ${a.data.model}`.toLowerCase();
+        const bKey = `${b.data.brand} ${b.data.model}`.toLowerCase(); 
         return aKey.localeCompare(bKey);
       });
   });

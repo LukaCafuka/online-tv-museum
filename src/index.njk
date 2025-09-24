@@ -10,14 +10,16 @@ lang: en
 			{% set d = g.data.description[lang] %}
 			{% set gallery = galleries[g.data.slug] %}
 			{% if gallery and gallery.length %}
-			  {% set hero = gallery[0] %}
+			  {% set hero = gallery[0].src %}
+			  {% set heroAlt = gallery[0].captions[lang] or gallery[0].captions['en'] or (g.data.brand + ' ' + g.data.model) %}
 			{% else %}
 			  {% set hero = g.data.image %}
+			  {% set heroAlt = g.data.brand + ' ' + g.data.model %}
 			{% endif %}
 			<div class="gear-item ui-widget ui-widget-content ui-corner-all">
 				<a class="gear-link" href="/equipment/{{ g.data.slug }}/" style="display:block; color:inherit;">
 					<span class="tag ui-corner-all">{{ g.data.category }}</span>
-					<img src="{{ hero }}" alt="{{ g.data.brand }} {{ g.data.model }}" loading="lazy" />
+					<img src="{{ hero }}" alt="{{ heroAlt }}" loading="lazy" />
 					<strong>{{ g.data.brand }} {{ g.data.model }}</strong><br/>
 					<small>{{ site.t[lang].year }}: {{ g.data.year }}</small>
 					<p style="font-size:0.8rem; line-height:1.2; margin-top:0.4rem;">{{ d.short or d.long or d }}</p>
