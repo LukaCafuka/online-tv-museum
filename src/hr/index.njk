@@ -7,26 +7,45 @@ description: "Pogledajte online muzej stare televizijske i video opreme iz zlatn
 ---
 
 <h2>{{ site.t[lang].equipment }}</h2>
+
+<div class="gear-toolbar ui-widget ui-widget-content ui-corner-all">
+  <input type="text" id="gear-search" class="gear-search ui-widget-content ui-corner-all" placeholder="{{ site.t[lang].searchPlaceholder }}" />
+  <div class="gear-categories" role="group" aria-label="Category filter">
+    <button type="button" class="cat-btn ui-state-default ui-corner-all active" data-category="all">{{ site.t[lang].allCategories }}</button>
+    {%- set cats = [] -%}
+    {%- for g in collections.equipment -%}
+      {%- if g.data.category and g.data.category not in cats -%}
+        {%- set cats = (cats.push(g.data.category), cats) -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- for cat in cats | sort -%}
+    <button type="button" class="cat-btn ui-state-default ui-corner-all" data-category="{{ cat }}">{{ cat | upper }}</button>
+    {%- endfor -%}
+  </div>
+</div>
+
+<p id="gear-no-results" class="gear-no-results" hidden>{{ site.t[lang].noResults }}</p>
+
 <div id="gear-grid" class="ui-helper-clearfix">
   {% for g in collections.equipment %}
     {% set d = g.data.description[lang] %}
-  {% set gallery = galleries[g.data.slug] %}
-  {% if gallery and gallery.length %}
-    {% set hero = gallery[0].src %}
-    {% set heroAlt = gallery[0].captions[lang] or gallery[0].captions['en'] or (g.data.brand + ' ' + g.data.model) %}
-  {% else %}
-    {% set hero = g.data.image %}
-    {% set heroAlt = g.data.brand + ' ' + g.data.model %}
-  {% endif %}
-  <div class="gear-item ui-widget ui-widget-content ui-corner-all">
-  <a class="gear-link" href="/oprema/{{ g.data.slug }}/" style="display:block; color:inherit;">
-    <span class="tag ui-corner-all">{{ g.data.category }}</span>
-    {% optimizedImage hero, heroAlt, "", "(min-width: 30em) 25vw, 50vw" %}
+    {% set gallery = galleries[g.data.slug] %}
+    {% if gallery and gallery.length %}
+      {% set hero = gallery[0].src %}
+      {% set heroAlt = gallery[0].captions[lang] or gallery[0].captions['en'] or (g.data.brand + ' ' + g.data.model) %}
+    {% else %}
+      {% set hero = g.data.image %}
+      {% set heroAlt = g.data.brand + ' ' + g.data.model %}
+    {% endif %}
+    <div class="gear-item ui-widget ui-widget-content ui-corner-all" data-category="{{ g.data.category }}" data-search="{{ (g.data.brand + ' ' + g.data.model + ' ' + g.data.year + ' ' + g.data.category + ' ' + (d.short or d.long or d)) | lower }}">
+      <a class="gear-link" href="/oprema/{{ g.data.slug }}/" style="display:block; color:inherit;">
+        <span class="tag ui-corner-all">{{ g.data.category }}</span>
+        {% optimizedImage hero, heroAlt, "", "(min-width: 30em) 25vw, 50vw" %}
         <strong>{{ g.data.brand }} {{ g.data.model }}</strong><br/>
         <small>{{ site.t[lang].year }}: {{ g.data.year }}</small>
         <p style="font-size:0.8rem; line-height:1.2; margin-top:0.4rem;">{{ d.short or d.long or d }}</p>
       </a>
-  <p style="margin:0; text-align:right; font-size:0.7rem;"><a class="details-link" href="/oprema/{{ g.data.slug }}/">{{ site.t[lang].details }} »</a></p>
+      <p style="margin:0; text-align:right; font-size:0.7rem;"><a class="details-link" href="/oprema/{{ g.data.slug }}/">{{ site.t[lang].details }} »</a></p>
     </div>
   {% endfor %}
 </div>

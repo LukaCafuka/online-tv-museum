@@ -14,7 +14,11 @@
       "brand": "Brand",
       "model": "Model",
       "language": "Language",
-      "details": "Details"
+      "details": "Details",
+      "videos": "Videos",
+      "searchPlaceholder": "Search equipment…",
+      "allCategories": "All",
+      "noResults": "No equipment matches your search."
     },
     "hr": {
       "siteTitle": "Lukin televizijski muzej",
@@ -27,7 +31,11 @@
       "brand": "Proizvođač",
       "model": "Model",
       "language": "Jezik",
-      "details": "Detalji"
+      "details": "Detalji",
+      "videos": "Video snimke",
+      "searchPlaceholder": "Pretraži opremu…",
+      "allCategories": "Sve",
+      "noResults": "Nema opreme koja odgovara vašem pretraživanju."
     }
   }
 }

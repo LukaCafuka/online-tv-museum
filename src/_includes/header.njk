@@ -7,9 +7,9 @@
   </nav> #}
   <div class="lang-switch">
     {% if lang == 'en' %}
-      <span>EN</span> | <a href="/hr/">HR</a>
+      <span>EN</span> | <a href="/hr/" onclick="try{localStorage.setItem('lang','hr')}catch(e){}">HR</a>
     {% else %}
-      <a href="/">EN</a> | <span>HR</span>
+      <a href="/" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a> | <span>HR</span>
     {% endif %}
   </div>
 </header>

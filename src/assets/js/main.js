@@ -14,6 +14,42 @@ $(function() {
     $(this).removeClass('ui-state-hover');
   });
 
+  // Search and category filter
+  (function() {
+    var $search = $('#gear-search');
+    var $items = $('#gear-grid .gear-item');
+    var $catBtns = $('.cat-btn');
+    var $noResults = $('#gear-no-results');
+    if (!$items.length) return;
+
+    var activeCat = 'all';
+
+    function applyFilters() {
+      var query = ($search.val() || '').toLowerCase().trim();
+      var visible = 0;
+
+      $items.each(function() {
+        var $el = $(this);
+        var matchesCat = activeCat === 'all' || $el.data('category') === activeCat;
+        var matchesSearch = !query || ($el.data('search') || '').indexOf(query) !== -1;
+        var show = matchesCat && matchesSearch;
+        $el.toggle(show);
+        if (show) visible++;
+      });
+
+      $noResults.prop('hidden', visible > 0);
+    }
+
+    $search.on('input', applyFilters);
+
+    $catBtns.on('click', function() {
+      $catBtns.removeClass('active ui-state-active');
+      $(this).addClass('active ui-state-active');
+      activeCat = $(this).data('category');
+      applyFilters();
+    });
+  })();
+
   // Lightbox / modal for gallery and hero images + navigation
   let galleryList = [];
   let galleryIndex = -1;

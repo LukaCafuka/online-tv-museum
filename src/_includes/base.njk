@@ -96,6 +96,28 @@
     
     <link rel="stylesheet" href="/assets/vendor/jquery-ui.min.css" />
     <link rel="stylesheet" href="/assets/css/theme.css?v=1" />
+    <script>
+    (function(){
+      try {
+        var pref = localStorage.getItem('lang');
+        if (!pref) return;
+        var p = location.pathname;
+        var isHr = p === '/hr/' || p.lastIndexOf('/hr/', 0) === 0 || p.lastIndexOf('/oprema/', 0) === 0;
+        var isEn = !isHr;
+        if (pref === 'hr' && isEn) {
+          var dest;
+          if (p.lastIndexOf('/equipment/', 0) === 0) dest = p.replace('/equipment/', '/oprema/');
+          else if (p === '/' || p === '/index.html') dest = '/hr/';
+          if (dest) location.replace(dest);
+        } else if (pref === 'en' && isHr) {
+          var dest;
+          if (p.lastIndexOf('/oprema/', 0) === 0) dest = p.replace('/oprema/', '/equipment/');
+          else if (p === '/hr/' || p === '/hr/index.html') dest = '/';
+          if (dest) location.replace(dest);
+        }
+      } catch(e) {}
+    })();
+    </script>
 </head>
 <body class="site-body">
     {% set lang = lang or site.defaultLang %}

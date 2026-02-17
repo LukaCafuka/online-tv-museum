@@ -115,6 +115,19 @@ module.exports = function(eleventyConfig) {
     return content.substring(0, length).trim() + '...';
   });
 
+  // Extract YouTube video ID from various URL formats
+  eleventyConfig.addFilter('youtubeId', (url) => {
+    if (!url) return '';
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtube\.com\/embed\/|youtu\.be\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/,
+    ];
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match) return match[1];
+    }
+    return url;
+  });
+
   return {
     dir: {
       input: 'src',

@@ -26,6 +26,7 @@ eleventyComputed:
       <li><a href="#tab-desc">{{ site.t[lang].description }}</a></li>
       <li><a href="#tab-specs">{{ site.t[lang].specifications }}</a></li>
       {% if gallery and gallery.length > 1 %}<li><a href="#tab-gallery">Gallery ({{ gallery.length }})</a></li>{% endif %}
+      {% if item.data.youtube and item.data.youtube.length %}<li><a href="#tab-videos">{{ site.t[lang].videos }} ({{ item.data.youtube.length }})</a></li>{% endif %}
     </ul>
     <div id="tab-desc">
       <div>{{ item.templateContent | langSection(lang) | safe }}</div>
@@ -50,8 +51,22 @@ eleventyComputed:
       </div>
     </div>
     {% endif %}
+    {% if item.data.youtube and item.data.youtube.length %}
+    <div id="tab-videos">
+      <div class="video-grid">
+        {% for vid in item.data.youtube %}
+          <div class="video-entry">
+            <div class="video-responsive">
+              <iframe src="https://www.youtube.com/embed/{{ vid.url | youtubeId }}" title="{{ vid.title or (item.data.brand + ' ' + item.data.model + ' video ' + loop.index) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+            {% if vid.title %}<p class="video-title">{{ vid.title }}</p>{% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
   </div>
   <p style="font-size:0.75rem;">
-  <a href="/oprema/{{ item.data.slug }}/">HR</a> | EN
+  <a href="/oprema/{{ item.data.slug }}/" onclick="try{localStorage.setItem('lang','hr')}catch(e){}">HR</a> | EN
   </p>
 </article>
