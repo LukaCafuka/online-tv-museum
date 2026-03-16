@@ -7,6 +7,12 @@ $(function() {
     }
   });
 
+  // Dark mode toggle
+  $('#theme-toggle').on('click', function() {
+    var isDark = document.documentElement.classList.toggle('dark');
+    try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch(e) {}
+  });
+
   // Hover state mimic for cards
   $('.gear-item').hover(function(){
     $(this).addClass('ui-state-hover');

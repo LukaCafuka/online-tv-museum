@@ -31,7 +31,7 @@ eleventyComputed:
 ---
 
 <!--lang:en-->
-This video tape recorder came from Turkey and I got it for a good price, but it's not in the best condition. Part of the front display is not functional and when powering on the device, it shows ERR-96 which indicates an error with the NV-RAM in the device.
+This video tape recorder came from Turkey and I got it for a good price, but it's not in the best condition. Part of the front display is not functional and when powering on the device, it shows ERR-96 which indicates an error with the NV-RAM in the device. It has very low head drum hours so that's a bonus.
 
 It is important to distinguish this model from similar models. If the model name contains the letter **M**, it means it is a **M**ultiformat model that can play back multiple formats; if it doesn't have M in the name, it can only record and play back Digital Betacam format. If it contains the letter **P**, it means it is a **P**AL standard device; if it doesn't have P in the name, it is an NTSC standard device.
 
@@ -47,7 +47,7 @@ In addition to playback, it can also record Digital Betacam video to tapes.
 <!--endlang-->
 
 <!--lang:hr-->
-Ovaj magnetoskop je došao iz Turske i dobio sam ga za povoljnu cijenu, no nije u baš najboljem stanju. Dio prednjeg ekrana nije funkcionalan i pri paljenju uređaja, pokazuje ERR-96 koji govori da je došlo do greške sa NV-RAMom u uređaju.
+Ovaj magnetoskop je došao iz Turske i dobio sam ga za povoljnu cijenu, no nije u baš najboljem stanju. Dio prednjeg ekrana nije funkcionalan i pri paljenju uređaja, pokazuje ERR-96 koji govori da je došlo do greške sa NV-RAMom u uređaju. Ima jako malo radnih sati što je lijepi bonus.
 
 Bitno je razlikovati ovaj model od sličnih modela. Ako model sadrži slovo **M** u sebi, to znači da je **M**ultiformat model koji može više formata reproducirati, ako nema M u imenu znači da može snimati i reproducirati samo Digital Betacam format. Ako sadrži slovo **P** u sebi, to znači da je **P**AL standard, ako nema P u sebi onda je NTSC standard.
 

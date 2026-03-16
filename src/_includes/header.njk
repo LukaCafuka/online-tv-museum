@@ -5,11 +5,17 @@
       <li><a href="{% if lang == 'hr' %}/hr/{% else %}/{% endif %}">{{ site.t[lang].home }}</a></li>
     </ul>
   </nav> #}
-  <div class="lang-switch">
-    {% if lang == 'en' %}
-      <span>EN</span> | <a href="/hr/" onclick="try{localStorage.setItem('lang','hr')}catch(e){}">HR</a>
-    {% else %}
-      <a href="/" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a> | <span>HR</span>
-    {% endif %}
+  <div class="header-controls">
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="theme-icon-light">&#9790;</span>
+      <span class="theme-icon-dark">&#9788;</span>
+    </button>
+    <div class="lang-switch">
+      {% if lang == 'en' %}
+        <span>EN</span> | <a href="/hr/" onclick="try{localStorage.setItem('lang','hr')}catch(e){}">HR</a>
+      {% else %}
+        <a href="/" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a> | <span>HR</span>
+      {% endif %}
+    </div>
   </div>
 </header>
