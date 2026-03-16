@@ -4,7 +4,7 @@
   "languages": ["en", "hr"],
   "t": {
     "en": {
-      "siteTitle": "Luka's Television Museum",
+      "siteTitle": "Luka's Broadcast Museum",
       "siteDescription": "Explore an online museum of vintage television and video equipment from the golden age of broadcasting.",
       "home": "Home",
       "equipment": "Equipment",
@@ -23,7 +23,7 @@
       "galleries": "Galleries"
     },
     "hr": {
-      "siteTitle": "Lukin televizijski muzej",
+      "siteTitle": "Lukin muzej radiodifuzije",
       "siteDescription": "Pogledajte online muzej stare televizijske i video opreme iz zlatnog doba radiodifuzije.",
       "home": "Početna",
       "equipment": "Oprema",

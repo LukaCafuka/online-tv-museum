@@ -1,0 +1,15 @@
+name: Deploy Broadcast Museum App
+on:
+  push:
+    branches: [ master ]
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Deploy Broadcast Museum
+        run: |
+          cd /home/luka/docker
+          rsync -av --delete $GITHUB_WORKSPACE/ /home/luka/lbm/
+          docker compose up -d --build --no-deps lbm

@@ -6,9 +6,9 @@ year: ???
 category: tbc
 description:
   en:
-    short: "Rare and mysterious TV standards converter, supports only composite video"
+    short: "Rare and mysterious TV standards converter. Supports only composite video"
   hr:
-    short: "Rijedak i misteriozni konverter TV standarda, podržava samo kompozitni video"
+    short: "Rijedak i misteriozni konverter TV standarda. Podržava samo kompozitni video"
 specs:
   en:
     - "Video inputs: Composite"
