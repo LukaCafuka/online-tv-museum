@@ -18,7 +18,9 @@
       "videos": "Videos",
       "searchPlaceholder": "Search equipment…",
       "allCategories": "All",
-      "noResults": "No equipment matches your search."
+      "noResults": "No equipment matches your search.",
+      "contact": "Contact",
+      "galleries": "Galleries"
     },
     "hr": {
       "siteTitle": "Lukin televizijski muzej",
@@ -35,7 +37,9 @@
       "videos": "Video snimke",
       "searchPlaceholder": "Pretraži opremu…",
       "allCategories": "Sve",
-      "noResults": "Nema opreme koja odgovara vašem pretraživanju."
+      "noResults": "Nema opreme koja odgovara vašem pretraživanju.",
+      "contact": "Kontakt",
+      "galleries": "Galerije"
     }
   }
 }

@@ -22,6 +22,12 @@
     {% elif lang == 'hr' and item.data %}
     <link rel="alternate" hreflang="en" href="{{ site.url }}/equipment/{{ item.data.slug }}/" />
     <link rel="alternate" hreflang="hr" href="{{ site.url }}/oprema/{{ item.data.slug }}/" />
+    {% elif lang == 'en' and page.url == '/galleries/' %}
+    <link rel="alternate" hreflang="hr" href="{{ site.url }}/hr/galerije/" />
+    <link rel="alternate" hreflang="en" href="{{ site.url }}/galleries/" />
+    {% elif lang == 'hr' and page.url == '/hr/galerije/' %}
+    <link rel="alternate" hreflang="en" href="{{ site.url }}/galleries/" />
+    <link rel="alternate" hreflang="hr" href="{{ site.url }}/hr/galerije/" />
     {% elif lang == 'en' %}
     <link rel="alternate" hreflang="hr" href="{{ site.url }}/hr/" />
     {% elif lang == 'hr' %}
@@ -107,11 +113,13 @@
         if (pref === 'hr' && isEn) {
           var dest;
           if (p.lastIndexOf('/equipment/', 0) === 0) dest = p.replace('/equipment/', '/oprema/');
+          else if (p.lastIndexOf('/galleries/', 0) === 0) dest = '/hr/galerije/';
           else if (p === '/' || p === '/index.html') dest = '/hr/';
           if (dest) location.replace(dest);
         } else if (pref === 'en' && isHr) {
           var dest;
           if (p.lastIndexOf('/oprema/', 0) === 0) dest = p.replace('/oprema/', '/equipment/');
+          else if (p === '/hr/galerije/' || p === '/hr/galerije/index.html') dest = '/galleries/';
           else if (p === '/hr/' || p === '/hr/index.html') dest = '/';
           if (dest) location.replace(dest);
         }

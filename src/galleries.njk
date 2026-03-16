@@ -1,0 +1,27 @@
+---
+title: Galleries
+layout: base.njk
+lang: en
+permalink: galleries/index.html
+description: "Browse all equipment image galleries from the television museum collection."
+---
+
+<p><a href="/">← {{ site.t[lang].equipment }}</a></p>
+<h2>{{ site.t[lang].galleries }}</h2>
+
+{% for g in collections.equipment %}
+  {% set gallery = galleries[g.data.slug] %}
+  {% if gallery and gallery.length %}
+  <section class="galleries-section ui-widget ui-widget-content ui-corner-all">
+    <h3><a href="/equipment/{{ g.data.slug }}/">{{ g.data.brand }} {{ g.data.model }}</a></h3>
+    <div class="gallery-grid">
+      {% for img in gallery %}
+        {% set caption = img.captions[lang] or img.captions['en'] or (g.data.brand + ' ' + g.data.model + ' image ' + loop.index) %}
+        <a href="{{ img.originalSrc }}" data-original="{{ img.originalSrc }}" class="gallery-thumb ui-corner-all ui-widget-content">
+          {% optimizedImage img.src, caption, "", "(min-width: 30em) 28vw, 90vw" %}
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+{% endfor %}

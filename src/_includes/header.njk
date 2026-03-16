@@ -1,11 +1,17 @@
 <header class="site-header">
+  <div class="menu-backdrop" id="menu-backdrop" aria-hidden="true"></div>
   <h1><a href="{% if lang == 'hr' %}/hr/{% else %}/{% endif %}">{{ site.t[lang].siteTitle }}</a></h1>
-  {# <nav>
-    <ul class="nav">
-      <li><a href="{% if lang == 'hr' %}/hr/{% else %}/{% endif %}">{{ site.t[lang].home }}</a></li>
-    </ul>
-  </nav> #}
-  <div class="header-controls">
+  <button type="button" id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span class="hamburger-bar"></span>
+    <span class="hamburger-bar"></span>
+    <span class="hamburger-bar"></span>
+  </button>
+  <div class="header-right" id="header-menu">
+    <nav class="header-nav">
+      <a href="{% if lang == 'hr' %}/hr/{% else %}/{% endif %}">{{ site.t[lang].home }}</a>
+      <a href="{% if lang == 'hr' %}/hr/galerije/{% else %}/galleries/{% endif %}">{{ site.t[lang].galleries }}</a>
+      <a href="https://z.com.hr" target="_blank" rel="noopener noreferrer">{{ site.t[lang].contact }}</a>
+    </nav>
     <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
       <span class="theme-icon-light">&#9790;</span>
       <span class="theme-icon-dark">&#9788;</span>

@@ -7,6 +7,33 @@ $(function() {
     }
   });
 
+  // Mobile hamburger menu
+  (function() {
+    var $header = $('.site-header');
+    var $hamburger = $('#hamburger');
+    var $backdrop = $('#menu-backdrop');
+    function closeMenu() {
+      $header.removeClass('menu-open');
+      $hamburger.attr('aria-expanded', 'false');
+      $backdrop.attr('aria-hidden', 'true');
+    }
+    function openMenu() {
+      $header.addClass('menu-open');
+      $hamburger.attr('aria-expanded', 'true');
+      $backdrop.attr('aria-hidden', 'false');
+    }
+    function toggleMenu() {
+      if ($header.hasClass('menu-open')) closeMenu();
+      else openMenu();
+    }
+    $hamburger.on('click', toggleMenu);
+    $backdrop.on('click', closeMenu);
+    $('.header-nav a').on('click', closeMenu);
+    $(document).on('keyup', function(e) {
+      if (e.key === 'Escape' && $header.hasClass('menu-open')) closeMenu();
+    });
+  })();
+
   // Dark mode toggle
   $('#theme-toggle').on('click', function() {
     var isDark = document.documentElement.classList.toggle('dark');
