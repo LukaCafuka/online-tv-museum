@@ -115,6 +115,13 @@ module.exports = function(eleventyConfig) {
     return content.substring(0, length).trim() + '...';
   });
 
+  // Build absolute URL (avoids double slashes)
+  eleventyConfig.addFilter('absoluteUrl', (base, path) => {
+    const b = (base || '').replace(/\/$/, '');
+    const p = (path || '/').replace(/^\//, '/');
+    return b + p;
+  });
+
   // Extract YouTube video ID from various URL formats
   eleventyConfig.addFilter('youtubeId', (url) => {
     if (!url) return '';
