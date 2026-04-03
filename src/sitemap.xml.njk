@@ -3,7 +3,7 @@ permalink: /sitemap.xml
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>{{ site.url | absoluteUrl('/') }}</loc>
     <changefreq>weekly</changefreq>
@@ -25,10 +25,21 @@ eleventyExcludeFromCollections: true
     <priority>0.6</priority>
   </url>
 {% for item in collections.equipment %}
+  {% set gallery = galleries[item.data.slug] %}
   <url>
     <loc>{{ site.url | absoluteUrl('/equipment/' + item.data.slug + '/') }}</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+    {% if gallery and gallery.length %}
+      {% for img in gallery %}
+    <image:image>
+      <image:loc>{{ site.url | absoluteUrl(img.originalSrc or img.src) }}</image:loc>
+      <image:title>{{ item.data.brand }} {{ item.data.model }} - image {{ loop.index }}</image:title>
+      {% set imageCaption = img.captions.en or img.captions.hr %}
+      {% if imageCaption %}<image:caption>{{ imageCaption | escape }}</image:caption>{% endif %}
+    </image:image>
+      {% endfor %}
+    {% endif %}
   </url>
   <url>
     <loc>{{ site.url | absoluteUrl('/oprema/' + item.data.slug + '/') }}</loc>

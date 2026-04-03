@@ -63,6 +63,20 @@ main { max-width: 1040px; margin: 18px auto 40px; padding:0 18px 10px; }
 .gear-detail .detail-image, .gear-detail picture { max-width:420px; width:100%; display:block; margin:0 0 16px; }
 .gear-detail picture img { width:100%; height:auto; }
 
+/* Make markdown links in description tab clearly recognizable in light mode */
+html:not(.dark) .gear-detail #tab-desc a {
+  color:#0066cc;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+html:not(.dark) .gear-detail #tab-desc a:hover {
+  color:#004a99;
+}
+html.dark .gear-detail #tab-desc a {
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+
 /* Gallery (re-added) */
 .gallery-grid { display:grid; gap:10px; grid-template-columns: repeat(auto-fill,minmax(120px,1fr)); margin-top:8px; }
 .gallery-thumb { display:flex; align-items:center; justify-content:center; padding:4px; background:#fff; text-align:center; position:relative; overflow:hidden; border:1px solid #b5bcc2; aspect-ratio:4/3; }
