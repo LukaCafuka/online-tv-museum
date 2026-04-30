@@ -86,6 +86,25 @@ $(function() {
   // Lightbox / modal for gallery and hero images + navigation
   let galleryList = [];
   let galleryIndex = -1;
+  /** Largest candidate URL from img srcset (for lightbox when data-original is missing). */
+  function largestSrcFromImg(img) {
+    if (!img) return '';
+    const attr = img.getAttribute('srcset');
+    if (!attr) return img.currentSrc || img.src;
+    let best = '';
+    let bestW = 0;
+    attr.split(',').forEach(function(part) {
+      const m = part.trim().match(/^(\S+)\s+(\d+)w$/);
+      if (m) {
+        const w = parseInt(m[2], 10);
+        if (w > bestW) {
+          bestW = w;
+          best = m[1];
+        }
+      }
+    });
+    return best || img.currentSrc || img.src;
+  }
   function buildGalleryList() {
     galleryList = $('.gallery-thumb').map(function(){
       const a = this; const img = $(a).find('img')[0];
@@ -126,8 +145,11 @@ $(function() {
     openLightbox($(this).attr('href') || img.src, img.alt, original);
   });
   $(document).on('click', '.detail-image', function(){
-    // Hero images don't have data-original, so they use the optimized version for both display and full image
-    openLightbox(this.src, this.alt, this.src);
+    // Hero uses responsive srcset; this.src / currentSrc are often a small candidate. Prefer the
+    // same full asset URL as gallery thumbs (data-original) so the modal matches gallery navigation.
+    const original = this.getAttribute('data-original');
+    const src = original || largestSrcFromImg(this);
+    openLightbox(src, this.alt, original || src);
   });
   $(document).on('click', '.lightbox-backdrop, .lightbox-close', function(){
     closeLightbox();

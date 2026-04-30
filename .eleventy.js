@@ -10,7 +10,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
 
   // Image optimization shortcode
-  eleventyConfig.addShortcode("optimizedImage", async function(src, alt, className = "", sizes = "100vw") {
+  eleventyConfig.addShortcode("optimizedImage", async function(src, alt, className = "", sizes = "100vw", dataOriginal = null) {
     if (!src) return "";
     
     // Handle relative paths from src/assets/images
@@ -38,6 +38,9 @@ module.exports = function(eleventyConfig) {
         loading: "lazy",
         decoding: "async"
       };
+      if (dataOriginal) {
+        imageAttributes["data-original"] = dataOriginal;
+      }
 
       return Image.generateHTML(metadata, imageAttributes);
     } catch (error) {

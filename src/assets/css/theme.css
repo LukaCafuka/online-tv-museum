@@ -61,6 +61,8 @@ main { max-width: 1040px; margin: 18px auto 40px; padding:0 18px 10px; }
 .gear-detail { background:linear-gradient(#ffffff,#f5f5f5); padding:20px 24px 26px; }
 .gear-detail img, .gear-detail picture img { background:#fff; padding:4px; box-shadow:0 0 4px rgba(0,0,0,.18); }
 .gear-detail .detail-image, .gear-detail picture { max-width:420px; width:100%; display:block; margin:0 0 16px; }
+.gear-detail picture:has(.detail-image) { cursor: pointer; }
+.gear-detail img.detail-image { cursor: pointer; }
 .gear-detail picture img { width:100%; height:auto; }
 
 /* Make markdown links in description tab clearly recognizable in light mode */
