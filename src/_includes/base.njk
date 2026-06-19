@@ -13,37 +13,37 @@
     {% endif %}
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+    <link rel="canonical" href="{{ site.url | absoluteUrl(page.url) }}" />
     
     <!-- Language alternates -->
     {% if lang == 'en' and item.data %}
-    <link rel="alternate" hreflang="hr" href="{{ site.url }}/oprema/{{ item.data.slug }}/" />
-    <link rel="alternate" hreflang="en" href="{{ site.url }}/equipment/{{ item.data.slug }}/" />
+    <link rel="alternate" hreflang="hr" href="{{ site.url | absoluteUrl('/oprema/' + item.data.slug + '/') }}" />
+    <link rel="alternate" hreflang="en" href="{{ site.url | absoluteUrl('/equipment/' + item.data.slug + '/') }}" />
     {% elif lang == 'hr' and item.data %}
-    <link rel="alternate" hreflang="en" href="{{ site.url }}/equipment/{{ item.data.slug }}/" />
-    <link rel="alternate" hreflang="hr" href="{{ site.url }}/oprema/{{ item.data.slug }}/" />
+    <link rel="alternate" hreflang="en" href="{{ site.url | absoluteUrl('/equipment/' + item.data.slug + '/') }}" />
+    <link rel="alternate" hreflang="hr" href="{{ site.url | absoluteUrl('/oprema/' + item.data.slug + '/') }}" />
     {% elif lang == 'en' and page.url == '/galleries/' %}
-    <link rel="alternate" hreflang="hr" href="{{ site.url }}/hr/galerije/" />
-    <link rel="alternate" hreflang="en" href="{{ site.url }}/galleries/" />
+    <link rel="alternate" hreflang="hr" href="{{ site.url | absoluteUrl('/hr/galerije/') }}" />
+    <link rel="alternate" hreflang="en" href="{{ site.url | absoluteUrl('/galleries/') }}" />
     {% elif lang == 'hr' and page.url == '/hr/galerije/' %}
-    <link rel="alternate" hreflang="en" href="{{ site.url }}/galleries/" />
-    <link rel="alternate" hreflang="hr" href="{{ site.url }}/hr/galerije/" />
+    <link rel="alternate" hreflang="en" href="{{ site.url | absoluteUrl('/galleries/') }}" />
+    <link rel="alternate" hreflang="hr" href="{{ site.url | absoluteUrl('/hr/galerije/') }}" />
     {% elif lang == 'en' %}
-    <link rel="alternate" hreflang="hr" href="{{ site.url }}/hr/" />
+    <link rel="alternate" hreflang="hr" href="{{ site.url | absoluteUrl('/hr/') }}" />
     {% elif lang == 'hr' %}
-    <link rel="alternate" hreflang="en" href="{{ site.url }}/" />
+    <link rel="alternate" hreflang="en" href="{{ site.url | absoluteUrl('/') }}" />
     {% endif %}
-    <link rel="alternate" hreflang="x-default" href="{{ site.url }}/" />
+    <link rel="alternate" hreflang="x-default" href="{{ site.url | absoluteUrl('/') }}" />
     
     <!-- Open Graph for social sharing -->
     <meta property="og:title" content="{{ title }} | {{ site.t[lang or site.defaultLang].siteTitle }}" />
     <meta property="og:description" content="{{ pageDescription }}" />
     {% set gallery = galleries[item.data.slug] if item.data %}
     {% if gallery and gallery.length %}
-    <meta property="og:image" content="{{ site.url }}{{ gallery[0].src }}" />
-    <meta name="twitter:image" content="{{ site.url }}{{ gallery[0].src }}" />
+    <meta property="og:image" content="{{ site.url | absoluteUrl(gallery[0].src) }}" />
+    <meta name="twitter:image" content="{{ site.url | absoluteUrl(gallery[0].src) }}" />
     {% endif %}
-    <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+    <meta property="og:url" content="{{ site.url | absoluteUrl(page.url) }}" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="{{ site.t[lang or site.defaultLang].siteTitle }}" />
     
@@ -68,7 +68,7 @@
       "category": "{{ item.data.category }}",
       {% if gallery and gallery.length %}
       "image": [
-        {% for img in gallery %}"{{ site.url }}{{ img.src }}"{{ "," if not loop.last }}{% endfor %}
+        {% for img in gallery %}"{{ site.url | absoluteUrl(img.src) }}"{{ "," if not loop.last }}{% endfor %}
       ],
       {% endif %}
       "description": "{{ item.templateContent | langSection(lang) | striptags | truncate(160) }}",
@@ -87,13 +87,13 @@
       "@type": "WebSite",
       "name": "{{ site.t[lang or site.defaultLang].siteTitle }}",
       "description": "{{ site.t[lang or site.defaultLang].siteDescription }}",
-      "url": "{{ site.url }}",
+      "url": "{{ site.url | absoluteUrl('/') }}",
       "inLanguage": ["en", "hr"],
       "potentialAction": {
         "@type": "SearchAction",
         "target": {
           "@type": "EntryPoint",
-          "urlTemplate": "{{ site.url }}/?q={search_term_string}"
+          "urlTemplate": "{{ site.url | absoluteUrl('/?q={search_term_string}') }}"
         },
         "query-input": "required name=search_term_string"
       }
