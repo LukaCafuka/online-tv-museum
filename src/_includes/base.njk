@@ -57,24 +57,33 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "{{ item.data.brand }} {{ item.data.model }}",
-      "brand": {
-        "@type": "Brand",
-        "name": "{{ item.data.brand }}"
-      },
-      "model": "{{ item.data.model }}",
-      "releaseDate": "{{ item.data.year }}",
-      "category": "{{ item.data.category }}",
-      {% if gallery and gallery.length %}
-      "image": [
-        {% for img in gallery %}"{{ site.url | absoluteUrl(img.src) }}"{{ "," if not loop.last }}{% endfor %}
-      ],
-      {% endif %}
-      "description": "{{ item.templateContent | langSection(lang) | striptags | truncate(160) }}",
-      "manufacturer": {
-        "@type": "Organization",
-        "name": "{{ item.data.brand }}"
+      "@type": "WebPage",
+      "name": "{{ title }}",
+      "url": "{{ site.url | absoluteUrl(page.url) }}",
+      "inLanguage": "{{ lang or site.defaultLang }}",
+      "description": "{{ pageDescription }}",
+      "mainEntity": {
+        "@type": "Thing",
+        "name": "{{ item.data.brand }} {{ item.data.model }}",
+        "description": "{{ item.templateContent | langSection(lang) | striptags | truncate(160) }}",
+        "brand": {
+          "@type": "Brand",
+          "name": "{{ item.data.brand }}"
+        },
+        "manufacturer": {
+          "@type": "Organization",
+          "name": "{{ item.data.brand }}"
+        },
+        {% if gallery and gallery.length %}
+        "image": [
+          {% for img in gallery %}"{{ site.url | absoluteUrl(img.src) }}"{{ "," if not loop.last }}{% endfor %}
+        ],
+        {% endif %}
+        "additionalProperty": [
+          { "@type": "PropertyValue", "name": "Model", "value": "{{ item.data.model }}" },
+          { "@type": "PropertyValue", "name": "Year", "value": "{{ item.data.year }}" },
+          { "@type": "PropertyValue", "name": "Category", "value": "{{ item.data.category }}" }
+        ]
       }
     }
     </script>
